@@ -20,6 +20,7 @@
         <activity android:name=".search.searchActivity"></activity>
         <activity android:name=".notification.notificationActivity"></activity>
         <activity android:name=".share.shareActivity"></activity>
+        <activity android:name=".profile.accountSettingsActivity"></activity>
     </application>
 
 </manifest>

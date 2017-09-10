@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">InstagramClone</string>
+    <string name="Edit_Profile">EditProfile</string>
+    <string name="Logout">Logout</string>
 </resources>
