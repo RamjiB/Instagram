@@ -3,39 +3,57 @@ package com.example.android.instagramclone.profile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.example.android.instagramclone.R;
+import com.example.android.instagramclone.Utils.SectionsStatePagerAdapter;
 import com.example.android.instagramclone.Utils.bottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.android.instagramclone.R.id.backArrow;
+import static com.example.android.instagramclone.R.string.Logout;
+
 /**
  * Created by Viji on 9/9/2017.
  */
 
 public class accountSettingsActivity extends AppCompatActivity {
+
     private static final String TAG = "accountSettingsActivity";
+    private SectionsStatePagerAdapter pagerAdapter;
+    private ViewPager mViewPager;
+    private RelativeLayout mRelativeLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
         Log.d(TAG,"OnCreate Started");
-        ImageView imageView = (ImageView) findViewById(R.id.backArrow);
+
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.relLayout1);
 
         setupSettingsList();
+        setupFragments();
+
         // setting up backArrow imageview to Prfile activity
-        imageView.setOnClickListener(new View.OnClickListener() {
+
+        ImageView backArrow = (ImageView) findViewById(R.id.backArrow);
+        backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Go back to profile activity");
@@ -44,16 +62,37 @@ public class accountSettingsActivity extends AppCompatActivity {
         });
 
     }
+    private void setupFragments(){
+        pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragment(new editProfileFragment(),getString(R.string.Edit_Profile));
+        pagerAdapter.addFragment(new logoutFragment(),getString(R.string.Logout));
+
+    }
+    private void setViewPager(int FragmentNumber){
+        mRelativeLayout.setVisibility(View.GONE);
+        Log.d(TAG,"setViewPager: navigating to fragment #"+ FragmentNumber);
+        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setCurrentItem(FragmentNumber);
+
+    }
 
     private void setupSettingsList() {
         Log.d(TAG,"setup Settings List: initialise account settings");
         ListView listView = (ListView) findViewById(R.id.accountListView);
         ArrayList<String> account = new ArrayList<>();
         account.add(getString(R.string.Edit_Profile));
-        account.add(getString(R.string.Logout));
+        account.add(getString(Logout));
 
         ArrayAdapter adapter = new ArrayAdapter(accountSettingsActivity.this,android.R.layout.simple_list_item_1,account);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG,"setItemClick : navigation to fragment #"+position);
+                setViewPager(position);
+                
+            }
+        });
     }
 //    /**
 //     * BottomNavigation View setup

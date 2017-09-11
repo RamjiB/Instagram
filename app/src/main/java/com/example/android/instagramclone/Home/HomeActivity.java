@@ -1,7 +1,6 @@
 package com.example.android.instagramclone.Home;
 
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.android.instagramclone.R;
+import com.example.android.instagramclone.Utils.SectionsPagerAdapter;
 import com.example.android.instagramclone.Utils.bottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
