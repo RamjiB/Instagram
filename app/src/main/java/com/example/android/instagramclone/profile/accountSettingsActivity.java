@@ -28,7 +28,7 @@ import static com.example.android.instagramclone.R.id.backArrow;
 import static com.example.android.instagramclone.R.string.Logout;
 
 /**
- * Created by Viji on 9/9/2017.
+ * Created by Ramji on 9/9/2017.
  */
 
 public class accountSettingsActivity extends AppCompatActivity {
@@ -37,6 +37,7 @@ public class accountSettingsActivity extends AppCompatActivity {
     private SectionsStatePagerAdapter pagerAdapter;
     private ViewPager mViewPager;
     private RelativeLayout mRelativeLayout;
+    private static final int ACTIVITY_NUM = 4;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,9 +49,10 @@ public class accountSettingsActivity extends AppCompatActivity {
         mRelativeLayout = (RelativeLayout) findViewById(R.id.relLayout1);
 
         setupSettingsList();
+        setupBottomNavigationView();
         setupFragments();
 
-        // setting up backArrow imageview to Prfile activity
+        // setting up backArrow imageview to Profile activity
 
         ImageView backArrow = (ImageView) findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
@@ -94,17 +96,17 @@ public class accountSettingsActivity extends AppCompatActivity {
             }
         });
     }
-//    /**
-//     * BottomNavigation View setup
-//     */
-//    private void setupBottomNavigationView(){
-//
-//        Log.d(TAG,"setupBottomNavigationView: Setting up BottomNavigationView");
-//        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
-//        bottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-//        bottomNavigationViewHelper.enableNavigation(accountSettingsActivity.this,bottomNavigationViewEx);
-//        Menu menu = bottomNavigationViewEx.getMenu();
-//        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
-//        menuItem.setChecked(true);
-//    }
+    /**
+     * BottomNavigation View setup
+     */
+    private void setupBottomNavigationView(){
+
+        Log.d(TAG,"setupBottomNavigationView: Setting up BottomNavigationView");
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
+        bottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+        bottomNavigationViewHelper.enableNavigation(accountSettingsActivity.this,bottomNavigationViewEx);
+        Menu menu = bottomNavigationViewEx.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
+    }
 }

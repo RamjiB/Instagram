@@ -29,7 +29,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     //Design library for Coordinator Layout and Toolbars
-
     compile 'com.android.support:design:25.3.1'
 
     //Bottom navigation ex library
@@ -37,4 +36,14 @@ dependencies {
 
     //circle image View
     compile 'de.hdodenhof:circleimageview:2.1.0'
+
+    //Image Loader
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    //firebase authentication
+    compile 'com.google.firebase:firebase-auth:10.2.6'
+
 }
+
+//firebase
+apply plugin: 'com.google.gms.google-services'
