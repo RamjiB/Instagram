@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log out from Instagram?"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:id="@+id/tvLogout"/>
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Log Out"
+            android:textSize="20sp"
+            android:id="@+id/btn_Logout"
+           android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/tvLogout"
+            android:background="@drawable/white_rounded_button"/>
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/logoutProgressBar"/>
+    <TextView
+        android:id="@+id/loggingout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logging Out..."
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_below="@id/logoutProgressBar"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

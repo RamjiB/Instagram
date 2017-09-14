@@ -84,6 +84,7 @@
         android:layout_centerInParent="true"
         android:id="@+id/registerRequestLoadingProgressBar"/>
     <TextView
+        android:id="@+id/registerPleaseWait"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please wait..."
