@@ -2,6 +2,10 @@
     <string name="app_name">InstagramClone</string>
     <string name="Edit_Profile">EditProfile</string>
     <string name="Logout">Logout</string>
+    <string name="Profile_fragment">Profile</string>
+
+    <!-- Dialog names -->
+    <string name="confirm_password_dialog">ConfirmPasswordDialog</string>
 
     <!-- Firebase Message -->
 
@@ -11,5 +15,12 @@
     <!-- firebasedatabase -->
     <string name="dbname_users">users</string>
     <string name="dbname_user_account_settings">user_account_settings</string>
+    <string name="field_usernaem">username</string>
+
+    <!-- Intent Extras -->
+    <string name="calling_activity">calling_activity</string>
+
+    <!-- activity names -->
+    <string name="profile_activity">profile_activity</string>
 
 </resources>

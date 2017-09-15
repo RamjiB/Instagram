@@ -38,7 +38,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
-                    android:id="@+id/done"
+                    android:id="@+id/savechanges"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/ic_done"/>
 

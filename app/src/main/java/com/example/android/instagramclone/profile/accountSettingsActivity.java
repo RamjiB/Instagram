@@ -51,6 +51,7 @@ public class accountSettingsActivity extends AppCompatActivity {
         setupSettingsList();
         setupBottomNavigationView();
         setupFragments();
+        getIncomingIntent();
 
         // setting up backArrow imageview to Profile activity
 
@@ -63,6 +64,15 @@ public class accountSettingsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private  void getIncomingIntent(){
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(getString(R.string.calling_activity))){
+            Log.d(TAG,"getIncomingIntent: received Incoming intent from" + getString(R.string.profile_activity));
+            setViewPager(pagerAdapter.getFragmentNumber(getString(R.string.Edit_Profile)));
+        }
     }
     private void setupFragments(){
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
@@ -109,4 +119,6 @@ public class accountSettingsActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
+
+
 }

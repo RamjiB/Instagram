@@ -8,46 +8,36 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <!-- Top Tool Bar -->
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/relativeLayout1">
-
-            <include layout="@layout/snippet_top_profile_bar"/>
-
-        </RelativeLayout>
 
         <!-- Middle Section -->
 
         <RelativeLayout
+            android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relativeLayout1"
-            android:id="@+id/relativeLayout2"
             android:background="@drawable/white_grey_border_bottom">
 
             <LinearLayout
+                android:id="@+id/linearLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/linearLayout1"
                 android:weightSum="100">
-                
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
-                    android:layout_marginStart="25dp">
+                    android:layout_marginStart="25dp"
+                    android:layout_weight="25">
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:id="@+id/profile_image"
+                        android:layout_centerVertical="true"
                         app:civ_border_color="@android:color/black"
-                        app:civ_border_width="2dp"
-                        android:layout_centerVertical="true"/>
+                        app:civ_border_width="2dp" />
 
 
                 </RelativeLayout>
@@ -55,12 +45,12 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="75"
+                    android:layout_marginEnd="25dp"
 
                     android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp">
+                    android:layout_weight="75">
 
-                    <include layout="@layout/snippet_top_profile"/>
+                    <include layout="@layout/snippet_top_profile" />
 
 
                 </RelativeLayout>
@@ -68,59 +58,62 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout1"
-                android:id="@+id/linearLayout2"
                 android:orientation="vertical"
                 android:padding="15dp">
 
                 <TextView
+                    android:id="@+id/display_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Ramji Balasubramanian"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:text="Ramji Balasubramanian"/>
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
                     android:layout_marginTop="10dp"
-                    android:text="Coiimbatore"/>
+                    android:text="Coimbatore"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/website"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/holo_blue_light"
-                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
                     android:text="website"
-                    android:layout_marginTop="10dp"/>
-        </LinearLayout>
+                    android:textColor="@android:color/holo_blue_light"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/relativeLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/relativeLayout3"
                 android:layout_below="@+id/linearLayout2"
                 android:layout_marginBottom="50dp">
 
                 <GridView
+                    android:id="@+id/gridView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/gridView"
-                    android:numColumns="3"
-                    android:verticalSpacing="1dp"
+                    android:gravity="center"
                     android:horizontalSpacing="1dp"
+                    android:numColumns="3"
                     android:stretchMode="columnWidth"
-                    android:gravity="center">
+                    android:verticalSpacing="1dp">
 
                 </GridView>
 
 
-        </RelativeLayout>
+            </RelativeLayout>
 
         </RelativeLayout>
 

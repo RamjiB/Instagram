@@ -15,7 +15,7 @@
             <!-- Profile Image -->
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
+                android:id="@+id/profile_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
@@ -27,7 +27,7 @@
                 android:id="@+id/changePhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profileImage"
+                android:layout_below="@id/profile_image"
                 android:layout_centerHorizontal="true"
                 android:padding="5dp"
                 android:text="Change Photo"
@@ -51,7 +51,7 @@
                     android:src="@drawable/ic_profile_name" />
 
                 <EditText
-                    android:id="@+id/usernameText"
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -79,7 +79,7 @@
                     android:src="@drawable/ic_profile" />
 
                 <EditText
-                    android:id="@+id/displayNameText"
+                    android:id="@+id/display_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -91,7 +91,7 @@
             </RelativeLayout>
             <!-- Website Section -->
             <RelativeLayout
-                android:id="@+id/website"
+                android:id="@+id/webSite"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/displayName"
@@ -105,7 +105,7 @@
                     android:src="@drawable/ic_website" />
 
                 <EditText
-                    android:id="@+id/websiteText"
+                    android:id="@+id/website"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -121,7 +121,7 @@
                 android:id="@+id/Bio"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/website"
+                android:layout_below="@id/webSite"
                 android:background="@drawable/grey_border_bottom">
 
                 <ImageView
@@ -162,8 +162,8 @@
                 android:id="@+id/Email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/grey_border_bottom"
-               android:layout_below="@id/privateInformation">
+                android:layout_below="@id/privateInformation"
+                android:background="@drawable/grey_border_bottom">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -173,7 +173,7 @@
                     android:src="@drawable/ic_email" />
 
                 <EditText
-                    android:id="@+id/EmailText"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
