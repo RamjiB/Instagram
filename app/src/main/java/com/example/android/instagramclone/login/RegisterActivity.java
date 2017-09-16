@@ -141,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         Query query = reference
                 .child(getString(R.string.dbname_users))
-                .orderByChild(getString(R.string.field_usernaem))
+                .orderByChild(getString(R.string.field_username))
                 .equalTo(username);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

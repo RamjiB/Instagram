@@ -52,7 +52,7 @@ public class ConfirmPasswordDialog extends android.support.v4.app.DialogFragment
             }
         });
 
-        
+
         TextView cancelDialog = (TextView) view.findViewById(R.id.dialogCancel);
         cancelDialog.setOnClickListener(new View.OnClickListener() {
             @Override

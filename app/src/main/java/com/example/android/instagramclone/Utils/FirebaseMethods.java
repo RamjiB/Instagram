@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static android.R.string.no;
+import static com.example.android.instagramclone.R.id.username;
 
 /**
  * Created by Ramji on 9/12/2017.
@@ -53,19 +54,77 @@ public class FirebaseMethods {
         }
     }
 
+    /**
+     * update username in users node and user account settings node
+     * @param username
+     */
+
     public void updateUsername(String username){
 
         Log.d(TAG,"updateUSernaem: updating username to "+ username);
 
         myRef.child(mContext.getString(R.string.dbname_users))
                 .child(userID)
-                .child(mContext.getString(R.string.field_usernaem))
+                .child(mContext.getString(R.string.field_username))
                 .setValue(username);
         myRef.child(mContext.getString(R.string.dbname_user_account_settings))
                 .child(userID)
-                .child(mContext.getString(R.string.field_usernaem))
+                .child(mContext.getString(R.string.field_username))
                 .setValue(username);
     }
+
+    /**
+     * update email in the users node
+     * @param email
+     */
+
+    public void updateEmail(String email){
+
+        Log.d(TAG,"updateUSernaem: updating username to "+ email);
+
+        myRef.child(mContext.getString(R.string.dbname_users))
+                .child(userID)
+                .child(mContext.getString(R.string.field_email))
+                .setValue(email);
+
+    }
+
+    /**
+     * update user Account settings
+     */
+    public void updateUserAccountSettings(String displayName,String website,String description,long phoneNumber){
+
+        Log.d(TAG,"updating user account settings");
+
+        if (displayName != null){
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                    .child(userID)
+                    .child(mContext.getString(R.string.field_display_name))
+                    .setValue(displayName);
+        }
+        if (website != null){
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                    .child(userID)
+                    .child(mContext.getString(R.string.field_website))
+                    .setValue(website);
+        }
+        if (description != null){
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                    .child(userID)
+                    .child(mContext.getString(R.string.field_description))
+                    .setValue(description);
+        }
+        if (phoneNumber != 0){
+
+            myRef.child(mContext.getString(R.string.dbname_users))
+                    .child(userID)
+                    .child(mContext.getString(R.string.field_phone_number))
+                    .setValue(phoneNumber);
+
+        }
+
+    }
+
 
 //    public boolean checkIfUSernameExists(String username, DataSnapshot datasnapshot) {
 //        Log.d(TAG,"checkIfUSernameExists : checking if "+ username + " already exists");

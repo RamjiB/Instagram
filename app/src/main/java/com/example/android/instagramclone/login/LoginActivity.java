@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     String email = mEmail.getText().toString();
                     String password = mPassword.getText().toString();
 
-                    if (isStringNull(email) && isStringNull(password)){
+                    if (isStringNull(email) || isStringNull(password)){
 
                         Toast.makeText(mContext,"You must fill in the fields",Toast.LENGTH_SHORT).show();
 
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                                         // signed in user can be handled in the listener.
                                         if (!task.isSuccessful()) {
                                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                                            Toast.makeText(mContext, R.string.auth_failed,
+                                            Toast.makeText(mContext, "Your email is not registered \n (or) \n"+R.string.auth_failed ,
                                                     Toast.LENGTH_SHORT).show();
                                             mProgressBar.setVisibility(View.GONE);
                                             mPleaseWait.setVisibility(View.GONE);
