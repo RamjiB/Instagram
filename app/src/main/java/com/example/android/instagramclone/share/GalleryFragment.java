@@ -28,6 +28,8 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.ArrayList;
 
+import static android.R.attr.bitmap;
+
 /**
  * Created by Ramji on 9/6/2017.
  */
@@ -87,7 +89,7 @@ public class GalleryFragment extends android.support.v4.app.Fragment {
                     startActivity(intent);
                 }else{
                     Intent intent = new Intent(getActivity(),accountSettingsActivity.class);
-                    intent.putExtra(getString(R.string.selected_image),mSelectedImage);
+                    intent.putExtra(getString(R.string.selected_image),bitmap);
                     intent.putExtra(getString(R.string.return_to_fragment),getString((R.string.Edit_Profile)));
                     startActivity(intent);
                     getActivity().finish();

@@ -1,6 +1,7 @@
 package com.example.android.instagramclone.profile;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -72,15 +73,26 @@ public class accountSettingsActivity extends AppCompatActivity {
 
         // if there is an image url attached as an extra, then it was chosen from gallery/photo fragment
 
-        if (intent.hasExtra(getString(R.string.selected_image))){
-            Log.d(TAG,"getIncomingIntent: New incoming image url");
-            if (intent.getStringExtra(getString(R.string.return_to_fragment)).equals(getString(R.string.Edit_Profile))){
+        if (intent.hasExtra(getString(R.string.selected_image)) || intent.hasExtra(getString(R.string.selected_bitmap))){
 
-                //set the new profile photo
-                FirebaseMethods firebaseMethods = new FirebaseMethods(accountSettingsActivity.this);
-                firebaseMethods.uploadNewPhoto(getString(R.string.profile_photo),null,0,(intent.getStringExtra(getString(R.string.selected_image))));
+            Log.d(TAG,"getIncomingIntent: New incoming image url");
+            if (intent.getStringExtra(getString(R.string.return_to_fragment)).equals(getString(R.string.Edit_Profile))) {
+
+                if (intent.hasExtra(getString(R.string.selected_image))) {
+                    //set the new profile photo
+                    FirebaseMethods firebaseMethods = new FirebaseMethods(accountSettingsActivity.this);
+                    firebaseMethods.uploadNewPhoto(getString(R.string.profile_photo), null, 0, (intent.getStringExtra(getString(R.string.selected_image))),null);
+
+                } else if (intent.hasExtra(getString(R.string.selected_bitmap))) {
+                    //set the new profile photo
+                    FirebaseMethods firebaseMethods = new FirebaseMethods(accountSettingsActivity.this);
+                    firebaseMethods.uploadNewPhoto(getString(R.string.profile_photo), null, 0,null,((Bitmap)intent.getParcelableExtra(getString(R.string.selected_bitmap))));
+
+                }
             }
+
         }
+
 
         if (intent.hasExtra(getString(R.string.calling_activity))){
             Log.d(TAG,"getIncomingIntent: received Incoming intent from" + getString(R.string.profile_activity));

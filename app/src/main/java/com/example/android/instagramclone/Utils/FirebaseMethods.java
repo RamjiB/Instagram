@@ -73,7 +73,7 @@ public class FirebaseMethods {
         }
     }
 
-    public void uploadNewPhoto(String photoType, final String caption, int count, final String imgUrl){
+    public void uploadNewPhoto(String photoType, final String caption, int count, final String imgUrl,Bitmap bm){
 
         Log.d(TAG,"uploadNewPhoto: attempting to upload a new photo");
 
@@ -89,7 +89,10 @@ public class FirebaseMethods {
                     .child(filePaths.FIREBASE_IMAGE_STORAGE +"/"+ user_id + "/photo" + (count +1));
 
             //convert image uri to bitmap
-            Bitmap bm = ImageManager.getBitmap(imgUrl);
+            if (bm == null){
+                bm = ImageManager.getBitmap(imgUrl);
+            }
+
             byte[] bytes= ImageManager.getBytesFromBitmap(bm,100);
 
             UploadTask uploadTask = null;
@@ -141,7 +144,6 @@ public class FirebaseMethods {
 
         else if (photoType.equals(mContext.getString(R.string.profile_photo))){
             Log.d(TAG,"uploadNewPhoto: uploading new PROFILE photo");
-
             ((accountSettingsActivity)mContext).setViewPager(
                     ((accountSettingsActivity)mContext).pagerAdapter
                             .getFragmentNumber(mContext.getString(R.string.Edit_Profile))
@@ -152,7 +154,9 @@ public class FirebaseMethods {
                     .child(filePaths.FIREBASE_IMAGE_STORAGE +"/"+ user_id + "/profile_photo" );
 
             //convert image uri to bitmap
-            Bitmap bm = ImageManager.getBitmap(imgUrl);
+            if (bm == null){
+                bm = ImageManager.getBitmap(imgUrl);
+            }
             byte[] bytes= ImageManager.getBytesFromBitmap(bm,100);
 
             UploadTask uploadTask = null;
@@ -169,6 +173,7 @@ public class FirebaseMethods {
 
                     //insert into the user_account_settings node
                     setProfilePhoto(firebaseUrl.toString());
+
 
 
 

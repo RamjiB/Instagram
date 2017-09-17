@@ -1,6 +1,7 @@
 package com.example.android.instagramclone.share;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.widget.Button;
 
 import com.example.android.instagramclone.R;
 import com.example.android.instagramclone.Utils.Permissions;
+import com.example.android.instagramclone.profile.accountSettingsActivity;
 
 /**
  * Created by Ramji on 9/6/2017.
@@ -59,6 +61,14 @@ public class PhotoFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
+    private boolean isRootTask(){
+        if (((shareActivity)getActivity()).getTask() == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -67,8 +77,27 @@ public class PhotoFragment extends android.support.v4.app.Fragment {
             Log.d(TAG,"onActivityResult : done taking a photo");
             Log.d(TAG,"onActivityResult : navigating to share screen");
 
-            // navigate to the final share screen to publish photo
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
+
+            if (isRootTask()){
+
+            }else{
+
+                try{
+                    Log.d(TAG,"onActivityResult: received new bitmap from camera: "+ bitmap);
+                    Intent intent = new Intent(getActivity(),accountSettingsActivity.class);
+                    intent.putExtra(getString(R.string.selected_bitmap),bitmap);
+                    intent.putExtra(getString(R.string.return_to_fragment),getString((R.string.Edit_Profile)));
+                    startActivity(intent);
+                    getActivity().finish();
+
+                }catch (NullPointerException e){
+                    Log.d(TAG,"onActivityResult: NullPointerExeception: "+ e.getMessage());
+                }
+
+
+            }
 
 
         }
