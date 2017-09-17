@@ -40,7 +40,7 @@ public class UniversalImageLoader {
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(mContext)
                 .defaultDisplayImageOptions(defaultOptions)
                 .memoryCache(new WeakMemoryCache())
-                .diskCacheSize(100 * 1024 * 1024)
+                .diskCacheSize(100 * 2048 * 2048)
                 .build();
         return configuration;
     }

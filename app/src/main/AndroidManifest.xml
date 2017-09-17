@@ -29,6 +29,7 @@
         <activity android:name=".profile.accountSettingsActivity"></activity>
         <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".login.RegisterActivity"></activity>
+        <activity android:name=".share.NextActivity"></activity>
     </application>
 
 </manifest>

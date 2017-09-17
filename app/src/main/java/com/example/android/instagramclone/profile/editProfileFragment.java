@@ -22,6 +22,7 @@ import com.example.android.instagramclone.dialogs.ConfirmPasswordDialog;
 import com.example.android.instagramclone.models.User;
 import com.example.android.instagramclone.models.UserAccountSettings;
 import com.example.android.instagramclone.models.UserSettings;
+import com.example.android.instagramclone.share.shareActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -41,9 +42,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.nostra13.universalimageloader.core.ImageLoader.TAG;
 
-/**
- * Created by Ramji on 9/10/2017.
- */
 
 public class editProfileFragment extends Fragment implements ConfirmPasswordDialog.OnConfirmPasswordListener {
 
@@ -163,6 +161,9 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
             public void onClick(View v) {
                 Log.d(TAG, "onClick: save changes");
                 saveProfileSettings();
+
+                Intent intent = new Intent(getActivity(),profileActivity.class);
+                startActivity(intent);
             }
         });
         return view;
@@ -284,6 +285,17 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
         mDescription.setText(settings.getDescription());
         mEmail.setText(user.getEmail());
         mPhoneNumber.setText(String.valueOf(user.getPhone_number()));
+
+        mChangeProfilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"changing profile photo");
+                Intent intent = new Intent(getActivity(),shareActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
     }
     /**

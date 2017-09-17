@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.android.instagramclone.R;
+import com.example.android.instagramclone.Utils.FirebaseMethods;
 import com.example.android.instagramclone.Utils.SectionsStatePagerAdapter;
 import com.example.android.instagramclone.Utils.bottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -34,7 +35,7 @@ import static com.example.android.instagramclone.R.string.Logout;
 public class accountSettingsActivity extends AppCompatActivity {
 
     private static final String TAG = "accountSettingsActivity";
-    private SectionsStatePagerAdapter pagerAdapter;
+    public SectionsStatePagerAdapter pagerAdapter;
     private ViewPager mViewPager;
     private RelativeLayout mRelativeLayout;
     private static final int ACTIVITY_NUM = 4;
@@ -69,6 +70,18 @@ public class accountSettingsActivity extends AppCompatActivity {
     private  void getIncomingIntent(){
         Intent intent = getIntent();
 
+        // if there is an image url attached as an extra, then it was chosen from gallery/photo fragment
+
+        if (intent.hasExtra(getString(R.string.selected_image))){
+            Log.d(TAG,"getIncomingIntent: New incoming image url");
+            if (intent.getStringExtra(getString(R.string.return_to_fragment)).equals(getString(R.string.Edit_Profile))){
+
+                //set the new profile photo
+                FirebaseMethods firebaseMethods = new FirebaseMethods(accountSettingsActivity.this);
+                firebaseMethods.uploadNewPhoto(getString(R.string.profile_photo),null,0,(intent.getStringExtra(getString(R.string.selected_image))));
+            }
+        }
+
         if (intent.hasExtra(getString(R.string.calling_activity))){
             Log.d(TAG,"getIncomingIntent: received Incoming intent from" + getString(R.string.profile_activity));
             setViewPager(pagerAdapter.getFragmentNumber(getString(R.string.Edit_Profile)));
@@ -80,7 +93,7 @@ public class accountSettingsActivity extends AppCompatActivity {
         pagerAdapter.addFragment(new logoutFragment(),getString(R.string.Logout));
 
     }
-    private void setViewPager(int FragmentNumber){
+    public void setViewPager(int FragmentNumber){
         mRelativeLayout.setVisibility(View.GONE);
         Log.d(TAG,"setViewPager: navigating to fragment #"+ FragmentNumber);
         mViewPager.setAdapter(pagerAdapter);
