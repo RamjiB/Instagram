@@ -5,8 +5,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
         android:orientation="vertical"
-        android:paddingTop="55dp"
+        android:paddingTop="40dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp">
         <ImageView
@@ -61,7 +62,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="20dp"
             android:text="No account yet? Create one"
             android:textSize="16sp"
             android:gravity="center"
@@ -70,9 +71,10 @@
     </LinearLayout>
 
     <ProgressBar
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerInParent="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/linearLayout"
+        android:layout_centerHorizontal="true"
         android:id="@+id/loginRequestLoadingProgressBar"/>
     <TextView
         android:id="@+id/pleaseWaitTextView"
@@ -80,7 +82,7 @@
         android:layout_height="wrap_content"
         android:text="Please wait..."
         android:textColor="@android:color/black"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:layout_below="@id/loginRequestLoadingProgressBar"
         android:layout_centerHorizontal="true"/>
 

@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -30,9 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
-/**
- * Created by Ramji on 9/11/2017.
- */
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -78,14 +76,17 @@ public class RegisterActivity extends AppCompatActivity {
                 username = mUsername.getText().toString();
                 password = mPassword.getText().toString();
 
+                hideSoftKeyboards();
+
                 if (checkInputs(email,username,password)){
 
                     mProgressBar.setVisibility(View.VISIBLE);
                     loadingPleaseWait.setVisibility(View.VISIBLE);
 
                     firebaseMethods.registerNewEmail(email,username,password);
-
                 }
+
+
             }
         });
     }
@@ -122,6 +123,13 @@ public class RegisterActivity extends AppCompatActivity {
             return true;
         }else{
             return false;
+        }
+    }
+
+    private void hideSoftKeyboards(){
+        if (getCurrentFocus() != null){
+            InputMethodManager imm =(InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         }
     }
 

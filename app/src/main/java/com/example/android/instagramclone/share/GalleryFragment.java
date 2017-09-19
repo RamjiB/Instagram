@@ -2,8 +2,10 @@ package com.example.android.instagramclone.share;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,6 +81,7 @@ public class GalleryFragment extends android.support.v4.app.Fragment {
 
         TextView nextScreen = (TextView) view.findViewById(R.id.galleryNext);
         nextScreen.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"onClick: navigating to the final share screen");
@@ -88,8 +91,9 @@ public class GalleryFragment extends android.support.v4.app.Fragment {
                     intent.putExtra(getString(R.string.selected_image),mSelectedImage);
                     startActivity(intent);
                 }else{
+                    Log.d(TAG,"pressed next");
                     Intent intent = new Intent(getActivity(),accountSettingsActivity.class);
-                    intent.putExtra(getString(R.string.selected_image),bitmap);
+                    intent.putExtra(getString(R.string.selected_image),mSelectedImage);
                     intent.putExtra(getString(R.string.return_to_fragment),getString((R.string.Edit_Profile)));
                     startActivity(intent);
                     getActivity().finish();

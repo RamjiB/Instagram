@@ -29,9 +29,7 @@ import java.util.List;
 import static com.example.android.instagramclone.R.id.backArrow;
 import static com.example.android.instagramclone.R.string.Logout;
 
-/**
- * Created by Ramji on 9/9/2017.
- */
+
 
 public class accountSettingsActivity extends AppCompatActivity {
 

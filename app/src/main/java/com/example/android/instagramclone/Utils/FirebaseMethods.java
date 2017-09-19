@@ -150,17 +150,23 @@ public class FirebaseMethods {
             );
 
             String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Log.d(TAG,"user_id" + user_id);
             StorageReference storageReference = mStorageRefernece
                     .child(filePaths.FIREBASE_IMAGE_STORAGE +"/"+ user_id + "/profile_photo" );
 
+
             //convert image uri to bitmap
             if (bm == null){
+                Log.d(TAG,"imgUrl "+ imgUrl);
                 bm = ImageManager.getBitmap(imgUrl);
             }
+
             byte[] bytes= ImageManager.getBytesFromBitmap(bm,100);
+
 
             UploadTask uploadTask = null;
             uploadTask =storageReference.putBytes(bytes);
+
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
