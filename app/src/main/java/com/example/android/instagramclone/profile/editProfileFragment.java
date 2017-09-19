@@ -1,5 +1,6 @@
 package com.example.android.instagramclone.profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -81,9 +83,11 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if (task.isSuccessful()) {
                                                                     Log.d(TAG, "User email address updated.");
-                                                                    Toast.makeText(getActivity(), "email updated", Toast.LENGTH_SHORT).show();
+                                                                    getActivity().finish();
                                                                     mFirebaseMethods.updateEmail(mEmail.getText().toString());
+                                                                    Toast.makeText(getActivity(), "email updated", Toast.LENGTH_SHORT).show();
                                                                     mFirebaseMethods.sendVerificationEmail();
+
                                                                 }
                                                             }
                                                         });
@@ -162,11 +166,16 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
                 Log.d(TAG, "onClick: save changes");
                 saveProfileSettings();
 
-//                Intent intent = new Intent(getActivity(),profileActivity.class);
-//                startActivity(intent);
             }
         });
         return view;
+    }
+    private void closeKeyboard() {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     /**
@@ -190,22 +199,6 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
             checkIfUsernameExists(username);
         }
 
-        //case2 : user made a change to their email
-        if (!mUserSettings.getUser().getEmail().equals(email)){
-
-            //step 1: Reauthenticate
-            //              -Confirm the password and email
-
-            ConfirmPasswordDialog dialog = new ConfirmPasswordDialog();
-            dialog.show(getFragmentManager(), getString(R.string.confirm_password_dialog));
-            dialog.setTargetFragment(editProfileFragment.this,1);
-
-
-
-            //step 2: check if the email is already registered
-            //step 3: change the email
-        }
-
         if (!mUserSettings.getSettings().getDisplay_name().equals(displayName)){
             //update display name
             mFirebaseMethods.updateUserAccountSettings(displayName,null,null,0);
@@ -222,10 +215,26 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
             //update phone number
             mFirebaseMethods.updateUserAccountSettings(null,null,null,phoneNumber);
         }
+
+        //case2 : user made a change to their email
+        if (!mUserSettings.getUser().getEmail().equals(email)){
+
+            //step 1: Reauthenticate
+            //              -Confirm the password and email
+
+            ConfirmPasswordDialog dialog = new ConfirmPasswordDialog();
+            dialog.show(getFragmentManager(), getString(R.string.confirm_password_dialog));
+            dialog.setTargetFragment(editProfileFragment.this,1);
+
+            //step 2: check if the email is already registered
+            //step 3: change the email
+        }else{
+            closeKeyboard();
+            getActivity().finish();
+        }
+
         Log.d(TAG,"userSetting phone number:"+ mUserSettings.getUser().getPhone_number() );
         Log.d(TAG,"phone number:"+ phoneNumber );
-
-
 
 
     }
@@ -296,6 +305,7 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
                 getActivity().finish();
             }
         });
+
 
     }
     /**
