@@ -82,6 +82,17 @@ public class PhotoFragment extends android.support.v4.app.Fragment {
 
             if (isRootTask()){
 
+                try{
+                    Log.d(TAG,"onActivityResult: received new bitmap from camera: "+ bitmap);
+                    Intent intent = new Intent(getActivity(),NextActivity.class);
+                    intent.putExtra(getString(R.string.selected_bitmap),bitmap);
+                    startActivity(intent);
+
+                }catch (NullPointerException e){
+                    Log.d(TAG,"onActivityResult: NullPointerExeception: "+ e.getMessage());
+                }
+
+
             }else{
 
                 try{
@@ -95,8 +106,6 @@ public class PhotoFragment extends android.support.v4.app.Fragment {
                 }catch (NullPointerException e){
                     Log.d(TAG,"onActivityResult: NullPointerExeception: "+ e.getMessage());
                 }
-
-
             }
 
 

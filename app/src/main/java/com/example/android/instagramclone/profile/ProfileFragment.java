@@ -1,5 +1,6 @@
 package com.example.android.instagramclone.profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -20,9 +22,14 @@ import android.widget.TextView;
 import com.example.android.instagramclone.Home.HomeActivity;
 import com.example.android.instagramclone.R;
 import com.example.android.instagramclone.Utils.FirebaseMethods;
+import com.example.android.instagramclone.Utils.GridImageAdapter;
+import com.example.android.instagramclone.Utils.StringManipulation;
 import com.example.android.instagramclone.Utils.UniversalImageLoader;
 import com.example.android.instagramclone.Utils.bottomNavigationViewHelper;
 import com.example.android.instagramclone.login.LoginActivity;
+import com.example.android.instagramclone.models.Comment;
+import com.example.android.instagramclone.models.Like;
+import com.example.android.instagramclone.models.Photo;
 import com.example.android.instagramclone.models.User;
 import com.example.android.instagramclone.models.UserAccountSettings;
 import com.example.android.instagramclone.models.UserSettings;
@@ -32,18 +39,30 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.nostra13.universalimageloader.utils.L;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by Ramji on 9/14/2017.
- */
 
 public class ProfileFragment extends Fragment{
     private static final String TAG = "ProfileFragment";
+
+    public interface OnGridImageSelectedListener{
+        void onGridImageSelected(Photo photo,int activityNumber);
+    }
+    OnGridImageSelectedListener mOnGridImageSelectedListener;
+
     private static final int ACTIVITY_NUM = 4;
+    private static final int NUM_GRID_COLUMNS = 3;
 
     //firebase
 
@@ -87,6 +106,7 @@ public class ProfileFragment extends Fragment{
         setupBottomNavigationView();
         setupToolBar();
         setupFirebaseAuth();
+        setupGridView();
 
         editProfile = (TextView) view.findViewById(R.id.textEditProfile);
         editProfile.setOnClickListener(new View.OnClickListener() {
@@ -96,12 +116,99 @@ public class ProfileFragment extends Fragment{
                 Intent intent = new Intent(getActivity(),accountSettingsActivity.class);
                 intent.putExtra(getString(R.string.calling_activity),getString(R.string.profile_activity));
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 
 
         return view;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        try{
+            mOnGridImageSelectedListener = (OnGridImageSelectedListener) getActivity();
+        }catch (ClassCastException e){
+            Log.e(TAG,"onAttach:ClassCast Exception: "+ e.getMessage());
+        }
+        super.onAttach(context);
+    }
+
+    private void setupGridView(){
+        Log.d(TAG,"setupGridView: Setting up image Grid");
+        final ArrayList<Photo> photos = new ArrayList<>();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        Query query = reference.child(getString(R.string.dbname_user_photos))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+
+                    Photo photo = new Photo();
+                    Map<String, Object> objectsMap = (HashMap<String ,Object>) singleSnapshot.getValue();
+
+                    photo.setCaption(objectsMap.get(getString(R.string.field_caption)).toString());
+                    photo.setTags(objectsMap.get(getString(R.string.field_tags)).toString());
+                    photo.setPhoto_id(objectsMap.get(getString(R.string.field_photo_id)).toString());
+                    photo.setUser_id(objectsMap.get(getString(R.string.field_user_id)).toString());
+                    photo.setDate_created(objectsMap.get(getString(R.string.field_date_created)).toString());
+                    photo.setImage_path(objectsMap.get(getString(R.string.field_image_path)).toString());
+
+                    Log.d(TAG,"map,Object");
+
+                    ArrayList<Comment> comments = new ArrayList<Comment>();
+
+                    for (DataSnapshot dSnapshot : singleSnapshot
+                            .child(getActivity().getString(R.string.field_comments)).getChildren()){
+                        Comment comment = new Comment();
+                        comment.setUser_id(dSnapshot.getValue(Comment.class).getUser_id());
+                        comment.setComment(dSnapshot.getValue(Comment.class).getComment());
+                        comment.setDate_created(dSnapshot.getValue(Comment.class).getDate_created());
+                        comments.add(comment);
+                    }
+
+                    photo.setComments(comments);
+
+                    List<Like> likesList = new ArrayList<Like>();
+                    for (DataSnapshot dSnapshot : singleSnapshot
+                            .child(getString(R.string.field_likes)).getChildren()){
+                        Like like = new Like();
+                        like.setUser_id(dSnapshot.getValue(Like.class).getUser_id());
+                        likesList.add(like);
+
+                    }
+                    photo.setLikes(likesList);
+                    photos.add(photo);
+                }
+
+                //SETUP PROFILE IMAGE GRID
+
+                int gridWidth = getResources().getDisplayMetrics().widthPixels;
+                int imageWidth = gridWidth/NUM_GRID_COLUMNS;
+                gridView.setColumnWidth(imageWidth);
+
+                ArrayList<String> imgUrls = new ArrayList<String>();
+                for (int i =0 ; i <photos.size(); i++){
+                    imgUrls.add(photos.get(i).getImage_path());
+                }
+                GridImageAdapter adapter = new GridImageAdapter(getActivity(), R.layout.layout_grid_imageview,"",imgUrls);
+                gridView.setAdapter(adapter);
+
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        mOnGridImageSelectedListener.onGridImageSelected(photos.get(position),ACTIVITY_NUM);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+     }
 
     private void setProfileWidgets(UserSettings userSettings){
 
@@ -136,6 +243,7 @@ public class ProfileFragment extends Fragment{
                 Log.d(TAG,"onClick: navigating to account settings");
                 Intent intent = new Intent(getActivity(),accountSettingsActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 
@@ -148,7 +256,7 @@ public class ProfileFragment extends Fragment{
 
         Log.d(TAG,"setupBottomNavigationView: Setting up BottomNavigationView");
         bottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationView);
-        bottomNavigationViewHelper.enableNavigation(getActivity(),bottomNavigationView);
+        bottomNavigationViewHelper.enableNavigation(getActivity(),getActivity(),bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

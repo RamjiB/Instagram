@@ -35,7 +35,7 @@ public class notificationActivity extends AppCompatActivity{
         Log.d(TAG,"setupBottomNavigationView: Setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationViewBar);
         bottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
-        bottomNavigationViewHelper.enableNavigation(notificationActivity.this,bottomNavigationViewEx);
+        bottomNavigationViewHelper.enableNavigation(notificationActivity.this,this,bottomNavigationViewEx);
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

@@ -47,7 +47,6 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
 
     @Override
     public void onConfirmPassword(String password) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         // Get auth credentials from the user for re-authentication. The example below shows
         // email and password credentials but there are multiple possible providers,
@@ -84,6 +83,7 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
                                                                     Log.d(TAG, "User email address updated.");
                                                                     Toast.makeText(getActivity(), "email updated", Toast.LENGTH_SHORT).show();
                                                                     mFirebaseMethods.updateEmail(mEmail.getText().toString());
+                                                                    mFirebaseMethods.sendVerificationEmail();
                                                                 }
                                                             }
                                                         });
@@ -162,8 +162,8 @@ public class editProfileFragment extends Fragment implements ConfirmPasswordDial
                 Log.d(TAG, "onClick: save changes");
                 saveProfileSettings();
 
-                Intent intent = new Intent(getActivity(),profileActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(),profileActivity.class);
+//                startActivity(intent);
             }
         });
         return view;

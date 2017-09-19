@@ -1,10 +1,11 @@
 package com.example.android.instagramclone.models;
 
-/**
- * Created by Viji on 9/17/2017.
- */
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Photo {
+import java.util.List;
+
+public class Photo implements Parcelable {
 
     private String caption;
     private String date_created;
@@ -12,18 +13,32 @@ public class Photo {
     private String photo_id;
     private String user_id;
     private String tags;
+    private List<Like> likes;
+    private List<Comment> comments;
 
-    public Photo(String caption, String date_created, String image_path, String photo_id, String user_id, String tags) {
+    public Photo() {
+
+    }
+
+    public Photo(String caption, String date_created, String image_path, String photo_id,
+                 String user_id, String tags, List<Like> likes, List<Comment> comments) {
+
         this.caption = caption;
         this.date_created = date_created;
         this.image_path = image_path;
         this.photo_id = photo_id;
         this.user_id = user_id;
         this.tags = tags;
+        this.likes = likes;
+        this.comments = comments;
     }
 
-    public Photo() {
+    public List<Comment> getComments() {
+        return comments;
+    }
 
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public String getCaption() {
@@ -74,6 +89,14 @@ public class Photo {
         this.tags = tags;
     }
 
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
     @Override
     public String toString() {
         return "Photo{" +
@@ -83,6 +106,17 @@ public class Photo {
                 ", photo_id='" + photo_id + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", tags='" + tags + '\'' +
+                ", likes=" + likes +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

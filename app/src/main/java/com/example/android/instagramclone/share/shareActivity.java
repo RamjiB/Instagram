@@ -21,9 +21,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import static android.R.attr.permission;
 
-/**
- * Created by Ramji on 9/5/2017.
- */
+
 
 public class shareActivity extends AppCompatActivity{
     private static final String TAG = "shareActivity";

@@ -282,7 +282,7 @@ public class FirebaseMethods {
 
     public void updateEmail(String email){
 
-        Log.d(TAG,"updateUSernaem: updating username to "+ email);
+        Log.d(TAG,"updateEmail: updating email to "+ email);
 
         myRef.child(mContext.getString(R.string.dbname_users))
                 .child(userID)
@@ -386,7 +386,7 @@ public class FirebaseMethods {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
-
+                        Toast.makeText(mContext, "check your email inbox", Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(mContext,"couldn't sent verifiaction email.", Toast.LENGTH_SHORT).show();
                     }
@@ -421,7 +421,8 @@ public class FirebaseMethods {
                 0,
                 profile_photo,
                 StringManipulation.condenseUsername(username),
-                website
+                website,
+                userID
         );
 
         myRef.child(mContext.getString(R.string.dbname_user_account_settings))

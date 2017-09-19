@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relativeLayout1"
-            android:background="@drawable/white_grey_border_bottom">
+            android:background="@android:color/white">
 
             <LinearLayout
                 android:id="@+id/linearLayout1"
@@ -63,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout1"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="10dp"
+                android:background="@drawable/white_grey_border_bottom">
 
                 <TextView
                     android:id="@+id/display_name"
