@@ -150,23 +150,17 @@ public class FirebaseMethods {
             );
 
             String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            Log.d(TAG,"user_id" + user_id);
             StorageReference storageReference = mStorageRefernece
                     .child(filePaths.FIREBASE_IMAGE_STORAGE +"/"+ user_id + "/profile_photo" );
 
-
             //convert image uri to bitmap
             if (bm == null){
-                Log.d(TAG,"imgUrl "+ imgUrl);
                 bm = ImageManager.getBitmap(imgUrl);
             }
-
             byte[] bytes= ImageManager.getBytesFromBitmap(bm,100);
-
 
             UploadTask uploadTask = null;
             uploadTask =storageReference.putBytes(bytes);
-
 
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -302,6 +296,7 @@ public class FirebaseMethods {
      */
     public void updateUserAccountSettings(String displayName,String website,String description,long phoneNumber){
 
+
         Log.d(TAG,"updating user account settings");
 
         if (displayName != null){
@@ -392,7 +387,7 @@ public class FirebaseMethods {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(mContext, "check your email inbox", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "verification email sent", Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(mContext,"couldn't sent verifiaction email.", Toast.LENGTH_SHORT).show();
                     }

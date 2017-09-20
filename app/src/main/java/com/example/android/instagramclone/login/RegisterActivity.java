@@ -69,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void init(){
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
