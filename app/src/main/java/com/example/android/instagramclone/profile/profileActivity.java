@@ -13,17 +13,21 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.android.instagramclone.R;
 import com.example.android.instagramclone.Utils.GridImageAdapter;
 import com.example.android.instagramclone.Utils.UniversalImageLoader;
 import com.example.android.instagramclone.Utils.ViewCommentsFragment;
 import com.example.android.instagramclone.Utils.ViewPostFragment;
+import com.example.android.instagramclone.Utils.ViewProfileFragment;
 import com.example.android.instagramclone.Utils.bottomNavigationViewHelper;
 import com.example.android.instagramclone.models.Photo;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
+
+import static android.R.attr.fragment;
 
 public class profileActivity extends AppCompatActivity implements ProfileFragment.OnGridImageSelectedListener,ViewPostFragment.OnCommentThreadSelectedListener{
 
@@ -82,13 +86,30 @@ public class profileActivity extends AppCompatActivity implements ProfileFragmen
 
         Log.d(TAG,"init: inflating" + getString(R.string.Profile_fragment));
 
-        ProfileFragment fragment = new ProfileFragment();
-        FragmentTransaction transaction = profileActivity.this.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container,fragment);
-        transaction.addToBackStack(getString(R.string.Profile_fragment));
-        transaction.commit();
+        Intent intent = getIntent();
+        if (intent.hasExtra(getString(R.string.calling_activity ))){
+            Log.d(TAG,"init: searching for user object attached as intent extra");
+            if (intent.hasExtra(getString(R.string.intent_user))){
+                Log.d(TAG,"init : inflating view Profile");
+                ViewProfileFragment fragment = new ViewProfileFragment();
+                Bundle args = new Bundle();
+                args.putParcelable(getString(R.string.intent_user),intent.getParcelableExtra(getString(R.string.intent_user)));
+                fragment.setArguments(args);
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.container,fragment);
+                transaction.addToBackStack(getString(R.string.view_profile_fragment));
+                transaction.commit();
+            }else{
+                Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Log.d(TAG,"init : inflating Profile");
+            ProfileFragment fragment = new ProfileFragment();
+            FragmentTransaction transaction = profileActivity.this.getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container,fragment);
+            transaction.addToBackStack(getString(R.string.Profile_fragment));
+            transaction.commit();
+        }
     }
-
-
-
 }

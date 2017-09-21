@@ -1,8 +1,6 @@
 package com.example.android.instagramclone.models;
 
-/**
- * Created by Viji on 9/14/2017.
- */
+
 
 public class UserSettings {
 

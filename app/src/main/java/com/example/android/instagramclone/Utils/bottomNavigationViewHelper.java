@@ -16,9 +16,6 @@ import com.example.android.instagramclone.search.searchActivity;
 import com.example.android.instagramclone.share.shareActivity;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-/**
- * Created by Ramji on 9/5/2017.
- */
 
 public class bottomNavigationViewHelper {
 

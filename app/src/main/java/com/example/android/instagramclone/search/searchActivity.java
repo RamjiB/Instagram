@@ -1,6 +1,7 @@
 package com.example.android.instagramclone.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.example.android.instagramclone.R;
 import com.example.android.instagramclone.Utils.UserListAdapter;
 import com.example.android.instagramclone.Utils.bottomNavigationViewHelper;
 import com.example.android.instagramclone.models.User;
+import com.example.android.instagramclone.profile.profileActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -130,6 +132,11 @@ public class searchActivity extends AppCompatActivity{
                 Log.d(TAG,"updateUsersList: onItemClick: "+ mUserList.get(position).toString());
 
                 //navigate to profile activity
+
+                Intent intent = new Intent(searchActivity.this,profileActivity.class);
+                intent.putExtra(getString(R.string.calling_activity),getString(R.string.search_activity));
+                intent.putExtra(getString(R.string.intent_user),mUserList.get(position));
+                startActivity(intent);
 
             }
         });
