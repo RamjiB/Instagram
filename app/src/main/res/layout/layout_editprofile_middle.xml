@@ -43,22 +43,23 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/grey_border_bottom">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_profile_name" />
 
-                <EditText
-                    android:id="@+id/username"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="50dp"
-                    android:background="@null"
-                    android:hint="username"
-                    android:inputType="textNoSuggestions" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="username"
+                        android:inputType="textNoSuggestions" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </RelativeLayout>
 
@@ -71,22 +72,23 @@
                 android:layout_below="@id/userName"
                 android:background="@drawable/grey_border_bottom">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_profile" />
 
-                <EditText
-                    android:id="@+id/display_name"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="50dp"
-                    android:background="@null"
-                    android:hint="display name"
-                    android:inputType="textNoSuggestions" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/display_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="display name"
+                        android:inputType="textNoSuggestions" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </RelativeLayout>
             <!-- Website Section -->
@@ -97,22 +99,23 @@
                 android:layout_below="@id/displayName"
                 android:background="@drawable/grey_border_bottom">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_website" />
-
-                <EditText
-                    android:id="@+id/website"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="50dp"
-                    android:background="@null"
-                    android:hint="Website"
-                    android:inputType="textNoSuggestions" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/website"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="Website"
+                        android:inputType="textNoSuggestions" />
+
+                </android.support.design.widget.TextInputLayout>
+
 
             </RelativeLayout>
 
@@ -124,22 +127,22 @@
                 android:layout_below="@id/webSite"
                 android:background="@drawable/grey_border_bottom">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_description" />
-
-                <EditText
-                    android:id="@+id/description"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="50dp"
-                    android:background="@null"
-                    android:hint="Description"
-                    android:inputType="textNoSuggestions" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="Description"
+                        android:inputType="textNoSuggestions" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </RelativeLayout>
 
@@ -165,22 +168,22 @@
                 android:layout_below="@id/privateInformation"
                 android:background="@drawable/grey_border_bottom">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_email" />
-
-                <EditText
-                    android:id="@+id/email"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="50dp"
-                    android:background="@null"
-                    android:hint="Email"
-                    android:inputType="textWebEmailAddress" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="Email"
+                        android:inputType="textWebEmailAddress" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </RelativeLayout>
 
@@ -193,22 +196,22 @@
                 android:layout_below="@id/Email"
                 android:background="@drawable/grey_border_bottom">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_mobile" />
-
-                <EditText
-                    android:id="@+id/mobileNumber"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="50dp"
-                    android:background="@null"
-                    android:hint="Mobile"
-                    android:inputType="number" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <EditText
+                        android:id="@+id/mobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:hint="Mobile"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </RelativeLayout>
 
