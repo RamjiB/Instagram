@@ -44,4 +44,9 @@ This is the replication of Instagram app written in Android. It uses Firebase to
     * [x] Edit profile activity
     * [x] Logout action
     
+### Reference
+
+https://codingwithmitch.com/courses/instagram-clone
+
+    
     
