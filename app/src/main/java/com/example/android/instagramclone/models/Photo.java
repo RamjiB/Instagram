@@ -33,6 +33,27 @@ public class Photo implements Parcelable {
         this.comments = comments;
     }
 
+    protected Photo(Parcel in) {
+        caption = in.readString();
+        date_created = in.readString();
+        image_path = in.readString();
+        photo_id = in.readString();
+        user_id = in.readString();
+        tags = in.readString();
+    }
+
+    public static final Creator<Photo> CREATOR = new Creator<Photo>() {
+        @Override
+        public Photo createFromParcel(Parcel in) {
+            return new Photo(in);
+        }
+
+        @Override
+        public Photo[] newArray(int size) {
+            return new Photo[size];
+        }
+    };
+
     public List<Comment> getComments() {
         return comments;
     }
@@ -117,6 +138,11 @@ public class Photo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(caption);
+        dest.writeString(date_created);
+        dest.writeString(image_path);
+        dest.writeString(photo_id);
+        dest.writeString(user_id);
+        dest.writeString(tags);
     }
 }

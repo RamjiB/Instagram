@@ -29,7 +29,8 @@ import java.util.ArrayList;
 
 import static android.R.attr.fragment;
 
-public class profileActivity extends AppCompatActivity implements ProfileFragment.OnGridImageSelectedListener,ViewPostFragment.OnCommentThreadSelectedListener{
+public class profileActivity extends AppCompatActivity implements ProfileFragment.OnGridImageSelectedListener,ViewPostFragment.OnCommentThreadSelectedListener,
+ViewProfileFragment.OnGridImageSelectedListener{
 
     private static final String TAG = "profileActivity";
 
