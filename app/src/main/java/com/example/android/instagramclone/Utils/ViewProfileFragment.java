@@ -76,9 +76,9 @@ public class ViewProfileFragment extends Fragment{
 
     //vars
     private User mUser;
-    private int mFollowersCount;
-    private int mFollowingCount;
-    private int mPostsCount;
+    private int mFollowersCount = 0;
+    private int mFollowingCount = 0;
+    private int mPostsCount = 0;
 
 
     @Nullable
